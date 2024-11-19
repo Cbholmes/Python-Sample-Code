@@ -23,7 +23,11 @@ class EarthquakeMap():
         
         #converts the geojson to a geopandas dataframe
         df = gpd.read_file(self._geojson)
-        
+
+        #returns none if there are no points to plot (avoids key errors from further in function)
+        if df.empty:
+            return None
+            
         #creates formatted date and time lists with the time column of the dataframe
         ftimes, fdates = [], []
         for i in df["time"]:
@@ -42,7 +46,7 @@ class EarthquakeMap():
         
         #adds new columns to the data frame with formatted dates and times and the point sizes
         df["ftime"] = ftimes
-        df["fdate"] = fdates
+        df["date"] = fdates
         df["psize"] = psizes
         return df
     
@@ -52,18 +56,23 @@ class EarthquakeMap():
        #gets the metadata section of the geojson to get the title of the map plot
         with url.urlopen(self._geojson) as f:
             title = json.load(f)["metadata"]["title"]
+
+        if not self._dataframe is None:
+            #creates a scatter plot on top of a map using the dataframe that contains earthquake data
+            fig = plot.scatter_geo(self._dataframe, lat=self._dataframe.geometry.y, lon=self._dataframe.geometry.x,
+                                   color="date", size="psize", custom_data=["title","mag","ftime"], 
+                                   title=title+" ("+str(len(self._dataframe))+")")
         
-        #creates a scatter plot on top of a map using the dataframe that contains earthquake data
-        fig = plot.scatter_geo(self._dataframe, lat=self._dataframe.geometry.y, lon=self._dataframe.geometry.x,
-                       color="fdate", size="psize",
-                       custom_data=["title","mag","ftime"], title=title)
+            #sets a custom template for what users see when they hover over points of the map
+            fig.update_traces(hovertemplate="<br>".join(["<b>%{customdata[0]}</b><br>",
+                                                        "Latitude: %{lat}",
+                                                        "Longitude: %{lon}",
+                                                        "Magnitude: %{customdata[1]}",
+                                                        "Time: %{customdata[2]}"]))
         
-        #sets a custom template for what users see when they hover over points of the map
-        fig.update_traces(hovertemplate="<br>".join(["<b>%{customdata[0]}</b><br>",
-                                                    "Latitude: %{lat}",
-                                                    "Longitude: %{lon}",
-                                                    "Magnitude: %{customdata[1]}",
-                                                    "Time: %{customdata[2]}"]))
+        else:
+            fig = plot.scatter_geo(title=title+" (None)")
+        
         return fig
     
     def showMap(self):
