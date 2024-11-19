@@ -33,6 +33,7 @@ class EarthquakeMap():
         
         #creates a list of plot point sizes converted from the 
         #magnitude of the point proportionally to a scale from 1-6
+        #with 1 being the minimum magnitude in the data frame and 6 being the max
         psizes = []
         magdiff = max(df["mag"]) - min(df["mag"])
         sizediff = 5
