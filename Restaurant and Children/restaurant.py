@@ -1,9 +1,10 @@
 class Restaurant():
     """Object represents a Restaurant"""
-    def __init__(self, name, foodtype):
+    def __init__(self, name, foodtype, numserved = 0):
         """Constructor, creates restaurant with given name and cuisine type."""
         self._name = name
         self._foodtype = foodtype
+        self._numserved = numserved
         
     def describeRestaurant(self):
         """Prints message displaying restaurant name and cuisine type."""
@@ -13,22 +14,19 @@ class Restaurant():
         """Prints declaration that restaurant is open."""
         print(self._name, "is now open.")
 
+    def setNumServed(self, numserved):
+        """Sets the number of guests served."""
+        self._numserved = numserved
 
-"""Driver code, creates 4 restaurants and prints information about them."""
-restaurant = Restaurant("Wendy's", "American")
-print(restaurant._name)
-print(restaurant._foodtype)
-restaurant.describeRestaurant()
-restaurant.openRestaurant()
-print()
-rosas = Restaurant("Rosa's Cafe", "Tex-Mex")
-rosas.describeRestaurant()
-print()
+    def incrNumServed(self, numserved):
+        """Increments the number of guests served by a set ammount."""
+        self._numserved += numserved
 
-olivegar = Restaurant("Olive Garden", "Italian")
-olivegar.describeRestaurant()
-print()
-
-chinaking = Restaurant("China King Buffet", "Chinese")
-chinaking.describeRestaurant()
-print()
+restaurant = Restaurant("Wendy's", "American", 432)
+print("Customers Served:", restaurant._numserved)
+restaurant._numserved = 496
+print("Customers Served:", restaurant._numserved)
+restaurant.setNumServed(512)
+print("Customers Served:", restaurant._numserved)
+restaurant.incrNumServed(30)
+print("Customers Served:", restaurant._numserved)
