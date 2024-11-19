@@ -8,7 +8,7 @@ class Restaurant():
         
     def describeRestaurant(self):
         """Prints message displaying restaurant name and cuisine type."""
-        print("The Restaurant", self._name, "serves", self._foodtype, "food.")
+        print("The Restaurant", self._name, "serves", self._foodtype)
         
     def openRestaurant(self):
         """Prints declaration that restaurant is open."""
@@ -21,12 +21,3 @@ class Restaurant():
     def incrNumServed(self, numserved):
         """Increments the number of guests served by a set ammount."""
         self._numserved += numserved
-
-restaurant = Restaurant("Wendy's", "American", 432)
-print("Customers Served:", restaurant._numserved)
-restaurant._numserved = 496
-print("Customers Served:", restaurant._numserved)
-restaurant.setNumServed(512)
-print("Customers Served:", restaurant._numserved)
-restaurant.incrNumServed(30)
-print("Customers Served:", restaurant._numserved)
