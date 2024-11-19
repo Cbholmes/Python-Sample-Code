@@ -3,9 +3,9 @@ This folder contains a command prompt application that creates and displays a sc
 
 Options for the map include:
 
-Time frame: last hour, last day, last week, last month
+  Time frame: last hour, last day, last week, last month
 
-Magnitude: All, 1.0+, 2.5+, 4.5+, Significant
+  Magnitude: All, 1.0+, 2.5+, 4.5+, Significant
 
 Instructions for running
 1. Download all files in this folder
