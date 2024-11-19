@@ -28,17 +28,3 @@ fig.update_traces(hovertemplate="<br>".join(["<b>%{customdata[0]}</b><br>",
                                              "Magnitude: %{customdata[1]}",
                                              "Time: %{customdata[2]}"]))
 fig.show()
-
-class EarthquakeMap():
-
-    def __init__(self, geojsonpath):
-        self._geojsonpath = geojsonpath
-        self._data = self._createDataFrame(self._geojsonpath)
-        self._figure = self._createFigure(self._data)
-
-    def _createDataFrame(self, geojsonpath):
-        return 
-
-##for loop to create list of unique dates
-##if udates<=2 elif 8 elif 31 title+=24 Hours, 7 Days, 30 Days
-##if if min(significant)>=600,title+=Significant elif min(mag)<1.0 elif 2.5 elif 4.5 title+=1.0+,2.5+,4.5+ Equakes
