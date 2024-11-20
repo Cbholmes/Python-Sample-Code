@@ -39,10 +39,13 @@ class EarthquakeMap():
         #magnitude of the point proportionally to a scale from 1-6
         #with 1 being the minimum magnitude in the data frame and 6 being the max
         psizes = []
-        magdiff = max(df["mag"]) - min(df["mag"])
-        sizediff = 5
-        for i in df["mag"]:
-            psizes.append((i - min(df["mag"])) * sizediff / magdiff + 1)
+        if len(df) == 1:
+            psizes.append(6)
+        else:
+            magdiff = max(df["mag"]) - min(df["mag"])
+            sizediff = 5
+            for i in df["mag"]:
+                psizes.append((i - min(df["mag"])) * sizediff / magdiff + 1)
         
         #adds new columns to the data frame with formatted dates and times and the point sizes
         df["ftime"] = ftimes
