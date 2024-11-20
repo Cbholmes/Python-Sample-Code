@@ -41,7 +41,8 @@ class EarthquakeMap():
         psizes = []
         magdiff = max(df["mag"]) - min(df["mag"])
         if magdiff == 0:
-            psizes.append(6)
+            for i in df["mag"]:
+                psizes.append(6)
         else:
             sizediff = 5
             for i in df["mag"]:
